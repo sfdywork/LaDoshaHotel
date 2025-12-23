@@ -21,7 +21,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding-top: 100px; /* Space for header */
+      padding-top: 100px;
       min-height: 100vh;
       overflow-x: hidden;
       position: relative;
@@ -37,19 +37,22 @@
       z-index: 10;
       box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     }
-    .site-header .container {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+    .header-inner {
+      display: flex; justify-content: space-between; align-items: center;
       padding: 10px 20px;
     }
-    .logo img { height:50px; width:auto; }
+    .logo img { height: 50px; width: auto; }
     .main-nav { display: flex; gap: 20px; align-items: center; }
     .main-nav a { font-weight: 500; color: #333; transition: color 0.3s; }
     .main-nav a:hover { color: #ff8800; }
     .menu-toggle { display: none; flex-direction: column; justify-content: space-between; width: 25px; height: 18px; background: none; border: none; cursor: pointer; }
-    .menu-toggle span { display: block; height: 3px; background: #333; border-radius: 2px; transition: 0.3s; }
-    .main-nav.active { display: flex; flex-direction: column; gap: 10px; position: absolute; top: 60px; right: 20px; background: #fff; padding: 15px 20px; border-radius: 10px; box-shadow: 0 6px 20px rgba(0,0,0,0.15); }
+    .menu-toggle span { display: block; height: 3px; background: #333; border-radius: 2px; }
+
+    @media(max-width:768px){
+      .main-nav { display: none; flex-direction: column; position: absolute; top: 60px; right: 20px; background: #fff; padding: 15px 20px; border-radius: 10px; box-shadow: 0 6px 20px rgba(0,0,0,0.15); }
+      .main-nav.active { display: flex; }
+      .menu-toggle { display: flex; }
+    }
 
     /* ===== Hero Section ===== */
     .menu-hero-wrapper { display: flex; flex-direction: column; align-items: center; text-align: center; margin-top: 40px; z-index: 1; }
@@ -57,25 +60,48 @@
       display: inline-block;
       background: linear-gradient(135deg, #ff8800, #ff6600);
       color: #fff;
-      padding: 30px 70px;
+      padding: 20px 50px;
       border-radius: 15px;
       font-weight: 800;
-      font-size: 2.5rem;
+      font-size: 2rem;
       letter-spacing: 2px;
       box-shadow: 0 12px 25px rgba(0,0,0,0.25);
       cursor: pointer;
-      transform: scale(0);
-      animation: blowUp 1s forwards;
-      animation-timing-function: cubic-bezier(0.68, -0.55, 0.27, 1.55);
       transition: all 0.3s ease;
-      position: relative;
       z-index: 2;
     }
-    #menu-button:hover { transform: scale(1.08); box-shadow: 0 18px 35px rgba(0,0,0,0.3); background: linear-gradient(135deg, #ff9933, #ff5500); }
-    .menu-subtitle { margin-top: 20px; font-size: 1.3rem; font-weight: 500; color: #222; opacity: 0; transform: translateY(20px); animation: slideUp 1s forwards; animation-delay: 1s; }
-    .menu-story { margin-top: 15px; font-size: 1.4rem; font-weight: bold; color: #222; max-width: 800px; opacity: 0; transform: translateY(20px); animation: slideUp 1s forwards; animation-delay: 1.5s; }
+    #menu-button:hover { transform: scale(1.05); box-shadow: 0 18px 35px rgba(0,0,0,0.3); background: linear-gradient(135deg, #ff9933, #ff5500); }
+    .menu-subtitle { margin-top: 20px; font-size: 1.3rem; font-weight: 500; color: #222; }
+    .menu-story { margin-top: 15px; font-size: 1.4rem; font-weight: bold; color: #222; max-width: 800px; }
     .hero-contact { margin-top: 25px; font-size: 0.95rem; text-align: center; }
     .hero-contact a { color: #333; font-weight: 500; }
+
+    /* ===== Christmas Offer ===== */
+    .christmas-offer {
+      width: 90%;
+      max-width: 360px;
+      margin: 30px auto;
+      background: #fff;
+      border-radius: 18px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      overflow: hidden;
+      text-align: center;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+    .christmas-offer:hover { transform: scale(1.02); }
+    .christmas-offer img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    .offer-expiry {
+      padding: 12px;
+      font-weight: bold;
+      background: #c62828;
+      color: #fff;
+      font-size: 0.95rem;
+    }
 
     /* ===== Live Game Section ===== */
     .live-game {
@@ -86,118 +112,37 @@
       background: #fff;
       border-radius: 16px;
       box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-      animation: pulseGlow 2s infinite;
       margin-top: 20px;
-      position: sticky;
-      top: 100px; /* stays below header */
-      z-index: 5;
     }
-    .live-indicator {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-weight: bold;
-      color: #e60000;
-      font-size: 1.3rem;
-      margin-bottom: 10px;
-    }
-    .live-indicator .dot {
-      width: 12px;
-      height: 12px;
-      background: #e60000;
-      border-radius: 50%;
-      margin-right: 8px;
-      animation: blink 1s infinite;
-    }
-    .live-desc {
-      font-size: 1.1rem;
-      color: #333;
-      margin-bottom: 15px;
-    }
-    .live-btn {
-      display: inline-block;
-      padding: 12px 25px;
-      font-weight: bold;
-      font-size: 1.1rem;
-      background: linear-gradient(135deg, #ff8800, #ff5500);
-      color: #fff;
-      border-radius: 10px;
-      box-shadow: 0 6px 18px rgba(0,0,0,0.2);
-      transition: transform 0.3s ease, background 0.3s ease;
-    }
-    .live-btn:hover {
-      transform: scale(1.05);
-      background: linear-gradient(135deg, #ff9933, #ff3300);
-    }
-    @keyframes blink {
-      0%, 50%, 100% { opacity: 1; }
-      25%, 75% { opacity: 0; }
-    }
-    @keyframes pulseGlow {
-      0% { box-shadow: 0 0 10px rgba(255,0,0,0.3); }
-      50% { box-shadow: 0 0 25px rgba(255,0,0,0.6); }
-      100% { box-shadow: 0 0 10px rgba(255,0,0,0.3); }
-    }
+    .live-indicator { display: flex; justify-content: center; align-items: center; font-weight: bold; color: #e60000; font-size: 1.3rem; margin-bottom: 10px; }
+    .live-indicator .dot { width: 12px; height: 12px; background: #e60000; border-radius: 50%; margin-right: 8px; animation: blink 1s infinite; }
+    .live-desc { font-size: 1.1rem; color: #333; margin-bottom: 15px; }
+    .live-btn { display: inline-block; padding: 12px 25px; font-weight: bold; font-size: 1.1rem; background: linear-gradient(135deg, #ff8800, #ff5500); color: #fff; border-radius: 10px; }
+    .live-btn:hover { transform: scale(1.05); background: linear-gradient(135deg, #ff9933, #ff3300); }
 
-    /* ===== Animations ===== */
-    @keyframes blowUp { 0% { transform: scale(0); opacity:0; } 60% { transform: scale(1.2); opacity:1; } 80% { transform: scale(0.95); } 100% { transform: scale(1); } }
-    @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-
-    /* Floating particles */
-    body::before {
-      content:"";
-      position:absolute; top:0; left:0; width:100%; height:100%;
-      background: radial-gradient(circle, rgba(255,255,255,0.15) 1px, transparent 1px);
-      background-size: 20px 20px; pointer-events:none;
-      animation: moveParticles 30s linear infinite; z-index: 0;
-    }
-    @keyframes moveParticles { from { background-position:0 0; } to { background-position:400px 400px; } }
+    @keyframes blink { 0%, 50%, 100% { opacity: 1; } 25%, 75% { opacity: 0; } }
 
     /* ===== Footer ===== */
-    .footer { margin-top: auto; width: 100%; background: #222; color: #fff; padding: 30px 20px; text-align: center; font-size: 0.95rem; }
+    .footer { width: 100%; background: #222; color: #fff; padding: 30px 20px; text-align: center; font-size: 0.95rem; }
 
     /* ===== Responsive ===== */
     @media(max-width:768px){
-      #menu-button { font-size:2rem; padding:25px 50px; }
+      #menu-button { font-size:1.8rem; padding: 15px 40px; }
       .menu-subtitle { font-size:1.1rem; }
-      .menu-story { font-size:1rem; letter-spacing: 0.3rem; }
-      .main-nav { display: none; flex-direction: column; }
-      .menu-toggle { display: flex; }
-      .main-nav.active { display: flex; }
+      .menu-story { font-size:1rem; }
     }
   </style>
 </head>
+
 <body>
-<script>
-  // Load preloader
-  fetch("preloader.html")
-    .then(r => r.text())
-    .then(data => {
-      document.body.insertAdjacentHTML("afterbegin", data);
-      document.body.style.overflow = "hidden";
-      window.addEventListener("load", () => {
-        const preloader = document.getElementById("preloader");
-        if(preloader){ preloader.classList.add("fade-out"); setTimeout(()=>preloader.remove(),600); }
-        document.body.style.overflow = "auto";
-      });
-      setTimeout(() => {
-        const preloader = document.getElementById("preloader");
-        if(preloader){ preloader.classList.add("fade-out"); setTimeout(()=>preloader.remove(),600); document.body.style.overflow = "auto"; }
-      }, 5000);
-    });
-</script>
 
 <!-- HEADER -->
 <header class="site-header">
   <div class="header-inner">
-    <!-- Logo -->
     <div class="logo">
-      <a href="index.html">
-        <img src="assets/images/ladoshalogo.png" alt="La Dosha Hotel Logo" />
-      </a>
+      <a href="index.html"><img src="assets/images/ladoshalogo.png" alt="La Dosha Hotel Logo" /></a>
     </div>
 
-    <!-- Nav Menu -->
     <nav class="main-nav" id="navMenu">
       <a href="index.html">Home</a>
       <a href="menu.html">Menu</a>
@@ -207,436 +152,96 @@
       <a href="destinations.html">Destination</a>
     </nav>
 
-    <!-- Cart + Hamburger -->
     <div class="header-actions">
-      <a href="cart.html" class="cart-float">🛒 <span id="cart-count" class="cart-count">0</span></a>
-      <button class="menu-toggle" aria-label="Toggle menu">
-        <span></span><span></span><span></span>
-      </button>
+      <a href="cart.html" class="cart-float">🛒 <span id="cart-count">0</span></a>
+      <button class="menu-toggle"><span></span><span></span><span></span></button>
     </div>
   </div>
 </header>
 
-<!-- TOAST -->
-<div id="toast" class="toast"></div>
-
-<style>
-  .site-header {
-    position: fixed;
-    top: 0; width: 100%;
-    background: #fff;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    z-index: 1000;
-  }
-  .header-inner {
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 10px 20px;
-  }
-  .logo img { height: 50px; width: auto; }
-  .main-nav { display: flex; gap: 20px; }
-  .main-nav a { color: #333; font-weight: 500; transition: color 0.3s; }
-  .main-nav a:hover { color: #ff8800; }
-  .header-actions { display: flex; align-items: center; gap: 10px; }
-
-  /* Hamburger */
-  .menu-toggle {
-    display: none;
-    flex-direction: column; justify-content: space-between;
-    width: 25px; height: 18px;
-    background: none; border: none; cursor: pointer;
-  }
-  .menu-toggle span {
-    display: block;
-    height: 3px; background: #333; border-radius: 2px;
-  }
-
-  /* Mobile Menu (animated) */
-  @media (max-width: 768px) {
-    .main-nav {
-      display: flex;
-      flex-direction: column;
-      position: absolute; top: 60px; right: 20px;
-      background: #fff;
-      padding: 15px 20px;
-      border-radius: 10px;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
-      opacity: 0;
-      transform: translateY(-15px);
-      pointer-events: none;
-      transition: all 0.3s ease;
-    }
-    .main-nav.active {
-      opacity: 1;
-      transform: translateY(0);
-      pointer-events: auto;
-    }
-    .menu-toggle { display: flex; }
-  }
-</style>
-
-<script>
-  const menuToggle = document.querySelector('.menu-toggle');
-  const navMenu = document.getElementById('navMenu');
-  const navLinks = navMenu.querySelectorAll('a');
-
-  // Toggle open/close
-  menuToggle.addEventListener('click', () => {
-    navMenu.classList.toggle('active');
-  });
-
-  // Close menu when a link is clicked
-  navLinks.forEach(link => {
-    link.addEventListener('click', () => {
-      navMenu.classList.remove('active');
-    });
-  });
-
-  // Optional: close if you click outside menu
-  document.addEventListener('click', (e) => {
-    if (!navMenu.contains(e.target) && !menuToggle.contains(e.target)) {
-      navMenu.classList.remove('active');
-    }
-  });
-</script>
-
-
-
 <main class="container">
+
+  <!-- HERO -->
   <div class="menu-hero-wrapper">
-    <div class="animated-bullet">Now Serving • Kinamba, Naivasha</div>
-    <h1 class="hype">La Dosha Hotel</h1>
-    <div class="hero-subtitle">Fast Food Hotel</div>
-    <a href="menu.html" id="menu-button" class="menu-button" role="button" aria-label="Open Menu">OPEN MENU</a>
+    <h1>La Dosha Hotel</h1>
+    <a href="menu.html" id="menu-button">OPEN MENU</a>
     <span class="menu-subtitle">You Order, We Deliver.</span>
-    <p class="menu-story" id="clock"></p>
-    <script>
-      function updateClock() {
-        const now = new Date();
-        const options = { weekday: 'long', hour: '2-digit', minute: '2-digit', second: '2-digit' };
-        document.getElementById("clock").textContent = now.toLocaleTimeString([], options);
-      }
-      setInterval(updateClock, 1000);
-      updateClock();
-    </script>
     <div class="hero-contact">
       Email: <a href="mailto:ladoshahotel@gmail.com">ladoshahotel@gmail.com</a> • 
       Phone: <a href="tel:+254715665770">+254 715 665 770</a>
     </div>
   </div>
 
+  <!-- 🎄 CHRISTMAS OFFER -->
+  <section id="christmasOffer" class="christmas-offer" onclick="addChristmasOfferToCart()">
+    <img src="assets/images/christimasoffer.png" alt="Christmas Offer">
+    <div class="offer-expiry">🎄 Offer valid until 28 December 2025</div>
+  </section>
+
   <!-- 🔴 Live Game Section -->
   <section class="live-game">
-    <div class="live-indicator">
-      <span class="dot"></span> Live Game Ongoing
-    </div>
+    <div class="live-indicator"><span class="dot"></span> Live Game Ongoing</div>
     <p class="live-desc">Spin the wheel now and order a surprise meal!</p>
     <a href="game.html" class="live-btn">Join Game</a>
   </section>
+
 </main>
 
-<!-- SOCIAL MEDIA SECTION ABOVE FOOTER -->
-<div id="social-media-section">
-  <div id="facebook-bar">
-    <a href="https://www.facebook.com/ladoshahotel" target="_blank" class="facebook-link">
-      <img src="assets/Social Media Platforms/facebook-screenshot.jpg" alt="Facebook Screenshot">
-    </a>  
-  </div>
-
-  <div id="tiktok-bar">
-    <a href="https://www.tiktok.com/@ladoshahotel" target="_blank" class="tiktok-link">
-      <img src="assets/Social Media Platforms/tiktok-screenshot.jpg" alt="TikTok Screenshot">
-    </a>
-  </div>
-</div>
-
-<style>
-  /* Container above footer */
-  #social-media-section {
-    display: flex;
-    justify-content: space-between; /* Facebook left, TikTok right */
-    align-items: center;
-    padding: 20px 40px; 
-    background-color: #111;
-    max-width: 1200px; /* optional: keeps content from stretching too much */
-    margin: 0 auto;     /* centers container on ultra-wide screens */    
-    margin-bottom: 20px;
-  }
-
-  /* Links and images */
-  .facebook-link img, .tiktok-link img {
-    width: 180px; 
-    height: auto;
-    border-radius: 12px;
-    object-fit: cover;
-    transition: transform 0.3s, box-shadow 0.3s;
-    cursor: pointer;
-  }
-
-  .facebook-link img:hover, .tiktok-link img:hover {
-    transform: scale(1.05);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
-  }
-
-  #facebook-bar {
-  margin-right: 60px; /* increase space to TikTok */
-}
-
-#tiktok-bar {
-  margin-left: 60px;  /* optional: adds extra spacing from Facebook */
-}
-
-  /* Responsive adjustments */
-  @media (max-width: 1024px) {
-    .facebook-link img, .tiktok-link img {
-      width: 160px;
-    }
-  }
-
-  @media (max-width: 768px) {
-    .facebook-link img, .tiktok-link img {
-      width: 140px;
-    }
-  }
-
-  @media (max-width: 480px) {
-    .facebook-link img, .tiktok-link img {
-      width: 110px;
-    }
-  }
-</style>
-
-
-
 <footer class="footer">
-  <div class="container">
-    <p>&copy; 2025 La Dosha Hotel. All Rights Reserved.</p>
-    <p>You Order We Deliver</p>
-  </div>
+  <p>&copy; 2025 La Dosha Hotel. All Rights Reserved.</p>
+  <p>You Order We Deliver</p>
 </footer>
 
 <script>
-  // ------------------ CART FUNCTIONS ------------------
-  function addToCart(id, name, price, qty, extra) {
-    let cart = JSON.parse(localStorage.getItem("cart")) || [];
-
-    let existing = cart.find(item => item.id === id);
-    if (existing) {
-      existing.qty += qty;
-    } else {
-      cart.push({ id, name, price, qty, img: extra?.img || "", note: extra?.note || "" });
-    }
-
-    localStorage.setItem("cart", JSON.stringify(cart));
-    updateCartCount();
-    showToast(name + " added to cart ✅");
-  }
-
-  function updateCartCount() {
-    let cart = JSON.parse(localStorage.getItem("cart")) || [];
-    let total = cart.reduce((sum, item) => sum + item.qty, 0);
-
-    // ✅ Make sure we target the cart-count element
-    const cartCount = document.getElementById("cart-count");
-    if (cartCount) cartCount.textContent = total;
-  }
-
-  function showToast(msg){
-    const toast = document.getElementById("toast");
-    toast.textContent = msg;
-    toast.classList.add("show");
-    setTimeout(()=>toast.classList.remove("show"), 2000);
-  }
-
-  // ✅ Run on page load so cart count is correct
-  document.addEventListener("DOMContentLoaded", updateCartCount);
-</script>
-
-
-<script>
+  // Toggle mobile menu
   const menuToggle = document.querySelector('.menu-toggle');
   const navMenu = document.getElementById('navMenu');
   menuToggle.addEventListener('click', () => navMenu.classList.toggle('active'));
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('service-worker.js')
-      .then(() => console.log('Service Worker registered'));
+
+  // Cart functions
+  function updateCartCount() {
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const total = cart.reduce((sum,item)=>sum+item.qty,0);
+    const cartCount = document.getElementById("cart-count");
+    if(cartCount) cartCount.textContent = total;
   }
-</script>
 
-<!-- PWA Install Button (Persistent Float) -->
-<div id="install-widget" style="
-  position: fixed;
-  bottom: 80px;
-  left: 20px;
-  width: 220px;
-  background: #ff8800;
-  color: #fff;
-  padding: 12px 16px;
-  border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-  font-family: sans-serif;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  z-index: 9999;
-  cursor: pointer;
-  transition: transform 0.3s ease;
-">
-  <span style="font-weight: bold; font-size: 14px;">Install La Dosha App</span>
-  <button id="install-widget-btn" style="
-    background: #fff;
-    color: #ff8800;
-    border: none;
-    border-radius: 8px;
-    padding: 6px 12px;
-    font-weight: bold;
-    cursor: pointer;
-  ">⬇️</button>
-</div>
-
-<script>
-let deferredPrompt;
-const installWidget = document.getElementById('install-widget');
-const installBtn = document.getElementById('install-widget-btn');
-
-installWidget.style.display = 'none'; // Hide initially
-
-// Triggered when PWA can be installed
-window.addEventListener('beforeinstallprompt', (e) => {
-  e.preventDefault();
-  deferredPrompt = e;
-  installWidget.style.display = 'flex';
-  installWidget.style.transform = 'translateX(0)';
-});
-
-// Click on widget to install
-installBtn.addEventListener('click', async () => {
-  if(deferredPrompt){
-    deferredPrompt.prompt();
-    const { outcome } = await deferredPrompt.userChoice;
-    console.log('User choice:', outcome);
-    deferredPrompt = null;
-    if(outcome === 'accepted'){
-      installWidget.style.display = 'none';
+  function showToast(msg){
+    let toast = document.getElementById("toast");
+    if(!toast){
+      toast = document.createElement("div");
+      toast.id="toast";
+      toast.className="toast";
+      toast.style.cssText="position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#333;color:#fff;padding:12px 20px;border-radius:8px;z-index:9999;";
+      document.body.appendChild(toast);
     }
+    toast.textContent = msg;
+    toast.style.display="block";
+    setTimeout(()=>toast.style.display="none",2000);
   }
-});
 
-// Optional: click anywhere on widget triggers install
-installWidget.addEventListener('click', () => installBtn.click());
-
-// Optional: minimize on swipe or click outside
-let minimized = false;
-installWidget.addEventListener('dblclick', () => {
-  if(!minimized){
-    installWidget.style.transform = 'translateX(-170px)'; // slide partially left
-    minimized = true;
-  } else {
-    installWidget.style.transform = 'translateX(0)';
-    minimized = false;
+  function addToCart(id,name,price,img){
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    let existing = cart.find(item=>item.id===id);
+    if(existing){ existing.qty+=1; } 
+    else { cart.push({id,name,price,qty:1,img}); }
+    localStorage.setItem("cart",JSON.stringify(cart));
+    updateCartCount();
+    showToast(`${name} added to cart ✅`);
   }
-});
 
-// Once app is installed, hide the widget
-window.addEventListener('appinstalled', () => {
-  installWidget.style.display = 'none';
-  console.log('App installed successfully!');
-});
+  function addChristmasOfferToCart(){
+    addToCart("christmas001","Christmas Special Meal",110,"assets/images/christimasoffer.png");
+  }
+
+  // Christmas offer expiry
+  const offerExpiryDate = new Date("2025-12-28T23:59:59");
+  const now = new Date();
+  const offer = document.getElementById("christmasOffer");
+  if(offer && now>offerExpiryDate){ offer.style.display="none"; }
+
+  document.addEventListener("DOMContentLoaded", updateCartCount);
 </script>
-
-<!-- Service-worker to make the app fully support offline use -->
-<script>
-if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.register("/service-worker.js")
-    .then(() => console.log("✅ Service Worker registered"))
-    .catch(err => console.error("SW registration failed:", err));
-}
-</script>
-
-
-<!-- A pop up to notify one that they are offline -->
-<div id="offline-notice">
-  ⚠️ You are offline. Some features may be limited.
-</div>
-
-<style>
-  #offline-notice {
-    display: none;
-    position: fixed;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: #ff4444;
-    color: #fff;
-    padding: 12px 20px;
-    border-radius: 8px;
-    font-weight: bold;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-    z-index: 9999;
-    animation: fadeInOut 0.5s ease;
-  }
-
-  @keyframes fadeInOut {
-    from { opacity: 0; transform: translate(-50%, 20px); }
-    to   { opacity: 1; transform: translate(-50%, 0); }
-  }
-</style>
-
-<script>
-  // Show popup when offline, hide when back online
-  function updateOnlineStatus() {
-    const notice = document.getElementById("offline-notice");
-    if (navigator.onLine) {
-      notice.style.display = "none";
-    } else {
-      notice.style.display = "block";
-    }
-  }
-
-  window.addEventListener("online", updateOnlineStatus);
-  window.addEventListener("offline", updateOnlineStatus);
-
-  // Run once at startup
-  updateOnlineStatus();
-</script>
-
-<!-- Mobile install app data -->
-<script>
-  let deferredPrompt;
-  const installBtn = document.createElement("button");
-  installBtn.innerText = "📲 Install La Dosha App";
-  installBtn.style.position = "fixed";
-  installBtn.style.bottom = "20px";
-  installBtn.style.right = "20px";
-  installBtn.style.padding = "12px 20px";
-  installBtn.style.background = "#ff5500";
-  installBtn.style.color = "#fff";
-  installBtn.style.border = "none";
-  installBtn.style.borderRadius = "10px";
-  installBtn.style.fontSize = "16px";
-  installBtn.style.fontWeight = "bold";
-  installBtn.style.boxShadow = "0 4px 10px rgba(0,0,0,0.2)";
-  installBtn.style.cursor = "pointer";
-  installBtn.style.display = "none"; // hidden until available
-  document.body.appendChild(installBtn);
-
-  window.addEventListener("beforeinstallprompt", (e) => {
-    e.preventDefault();
-    deferredPrompt = e;
-    installBtn.style.display = "block"; // show button on phones
-  });
-
-  installBtn.addEventListener("click", async () => {
-    installBtn.style.display = "none";
-    if (deferredPrompt) {
-      deferredPrompt.prompt();
-      const { outcome } = await deferredPrompt.userChoice;
-      console.log("User choice:", outcome);
-      deferredPrompt = null;
-    }
-  });
-</script>
-
-
 
 </body>
 </html>
