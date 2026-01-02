@@ -13,7 +13,6 @@
   <link rel="shortcut icon" href="assets/images/ladoshalogo.png" type="image/png" />
 
   <style>
-    /* ===== Reset & Base ===== */
     body {
       margin: 0;
       font-family: sans-serif;
@@ -27,20 +26,8 @@
       position: relative;
     }
     a { text-decoration: none; color: inherit; }
-
-    /* ===== Header ===== */
-    .site-header {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      background: rgba(255,255,255,0.95);
-      z-index: 10;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    }
-    .header-inner {
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 10px 20px;
-    }
+    .site-header { position: fixed; top: 0; width: 100%; background: rgba(255,255,255,0.95); z-index: 10; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+    .header-inner { display: flex; justify-content: space-between; align-items: center; padding: 10px 20px; }
     .logo img { height: 50px; width: auto; }
     .main-nav { display: flex; gap: 20px; align-items: center; }
     .main-nav a { font-weight: 500; color: #333; transition: color 0.3s; }
@@ -54,95 +41,43 @@
       .menu-toggle { display: flex; }
     }
 
-    /* ===== Hero Section ===== */
     .menu-hero-wrapper { display: flex; flex-direction: column; align-items: center; text-align: center; margin-top: 40px; z-index: 1; }
-    #menu-button {
-      display: inline-block;
-      background: linear-gradient(135deg, #ff8800, #ff6600);
-      color: #fff;
-      padding: 20px 50px;
-      border-radius: 15px;
-      font-weight: 800;
-      font-size: 2rem;
-      letter-spacing: 2px;
-      box-shadow: 0 12px 25px rgba(0,0,0,0.25);
-      cursor: pointer;
-      transition: all 0.3s ease;
-      z-index: 2;
-    }
+    #menu-button { display: inline-block; background: linear-gradient(135deg, #ff8800, #ff6600); color: #fff; padding: 20px 50px; border-radius: 15px; font-weight: 800; font-size: 2rem; letter-spacing: 2px; box-shadow: 0 12px 25px rgba(0,0,0,0.25); cursor: pointer; transition: all 0.3s ease; z-index: 2; }
     #menu-button:hover { transform: scale(1.05); box-shadow: 0 18px 35px rgba(0,0,0,0.3); background: linear-gradient(135deg, #ff9933, #ff5500); }
     .menu-subtitle { margin-top: 20px; font-size: 1.3rem; font-weight: 500; color: #222; }
     .menu-story { margin-top: 15px; font-size: 1.4rem; font-weight: bold; color: #222; max-width: 800px; }
     .hero-contact { margin-top: 25px; font-size: 0.95rem; text-align: center; }
     .hero-contact a { color: #333; font-weight: 500; }
 
-    /* ===== Christmas Offer ===== */
-    .christmas-offer {
-      width: 90%;
-      max-width: 360px;
-      margin: 30px auto;
-      background: #fff;
-      border-radius: 18px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-      overflow: hidden;
-      text-align: center;
-      cursor: pointer;
-      transition: transform 0.3s;
-    }
-    .christmas-offer:hover { transform: scale(1.02); }
-    .christmas-offer img {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
-    .offer-expiry {
-      padding: 12px;
-      font-weight: bold;
-      background: #c62828;
-      color: #fff;
-      font-size: 0.95rem;
-    }
+    .mystery-offer { width: 90%; max-width: 360px; margin: 30px auto; background: #ffffff; border-radius: 20px; box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25); overflow: hidden; text-align: center; cursor: pointer; transition: transform 0.35s ease, box-shadow 0.35s ease; }
+    .mystery-offer:hover { transform: scale(1.04); box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35); }
+    .mystery-offer img { width: 100%; height: auto; display: block; }
+    .mystery-offer .offer-expiry { padding: 14px; font-weight: 600; background: linear-gradient(135deg, #000000, #e67e22); color: #ffffff; font-size: 0.95rem; line-height: 1.4; }
 
-    /* ===== Live Game Section ===== */
-    .live-game {
-      margin: 40px auto;
-      padding: 25px;
-      max-width: 600px;
-      text-align: center;
-      background: #fff;
-      border-radius: 16px;
-      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-      margin-top: 20px;
-    }
-    .live-indicator { display: flex; justify-content: center; align-items: center; font-weight: bold; color: #e60000; font-size: 1.3rem; margin-bottom: 10px; }
-    .live-indicator .dot { width: 12px; height: 12px; background: #e60000; border-radius: 50%; margin-right: 8px; animation: blink 1s infinite; }
-    .live-desc { font-size: 1.1rem; color: #333; margin-bottom: 15px; }
-    .live-btn { display: inline-block; padding: 12px 25px; font-weight: bold; font-size: 1.1rem; background: linear-gradient(135deg, #ff8800, #ff5500); color: #fff; border-radius: 10px; }
-    .live-btn:hover { transform: scale(1.05); background: linear-gradient(135deg, #ff9933, #ff3300); }
+    #voucherModal { display: none; position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.6); justify-content:center; align-items:center; z-index:9999; }
+    #voucherModal .modal-content { background: #fff; padding: 25px; border-radius: 15px; width:90%; max-width:400px; text-align:center; }
+    #voucherModal input { width: 80%; padding: 10px; margin: 10px 0; font-size: 1rem; border-radius: 8px; border: 1px solid #ccc; }
+    #voucherModal button { background: #ff8800; color: #fff; padding: 10px 20px; font-weight: bold; border: none; border-radius: 10px; cursor: pointer; }
+    #voucherModal button:hover { background: #ff5500; }
 
-    @keyframes blink { 0%, 50%, 100% { opacity: 1; } 25%, 75% { opacity: 0; } }
+    .live-game { margin: 40px auto; padding: 25px; max-width: 600px; text-align: center; background: #fff; border-radius: 16px; box-shadow: 0 8px 25px rgba(0,0,0,0.15); margin-top: 20px; }
+    .live-indicator { display:flex; justify-content:center; align-items:center; font-weight:bold; color:#e60000; font-size:1.3rem; margin-bottom:10px; }
+    .live-indicator .dot { width:12px; height:12px; background:#e60000; border-radius:50%; margin-right:8px; animation:blink 1s infinite; }
+    .live-desc { font-size:1.1rem; color:#333; margin-bottom:15px; }
+    .live-btn { display:inline-block; padding:12px 25px; font-weight:bold; font-size:1.1rem; background:linear-gradient(135deg,#ff8800,#ff5500); color:#fff; border-radius:10px; }
+    .live-btn:hover { transform:scale(1.05); background:linear-gradient(135deg,#ff9933,#ff3300); }
 
-    /* ===== Footer ===== */
-    .footer { width: 100%; background: #222; color: #fff; padding: 30px 20px; text-align: center; font-size: 0.95rem; }
+    @keyframes blink { 0%,50%,100% { opacity:1; } 25%,75% { opacity:0; } }
 
-    /* ===== Responsive ===== */
-    @media(max-width:768px){
-      #menu-button { font-size:1.8rem; padding: 15px 40px; }
-      .menu-subtitle { font-size:1.1rem; }
-      .menu-story { font-size:1rem; }
-    }
+    .footer { width: 100%; background: #222; color:#fff; padding:30px 20px; text-align:center; font-size:0.95rem; }
   </style>
 </head>
 
 <body>
 
-<!-- HEADER -->
 <header class="site-header">
   <div class="header-inner">
-    <div class="logo">
-      <a href="index.html"><img src="assets/images/ladoshalogo.png" alt="La Dosha Hotel Logo" /></a>
-    </div>
-
+    <div class="logo"><a href="index.html"><img src="assets/images/ladoshalogo.png" alt="La Dosha Hotel Logo" /></a></div>
     <nav class="main-nav" id="navMenu">
       <a href="index.html">Home</a>
       <a href="menu.html">Menu</a>
@@ -151,7 +86,6 @@
       <a href="contact.html">Contact</a>
       <a href="destinations.html">Destination</a>
     </nav>
-
     <div class="header-actions">
       <a href="cart.html" class="cart-float">🛒 <span id="cart-count">0</span></a>
       <button class="menu-toggle"><span></span><span></span><span></span></button>
@@ -160,8 +94,6 @@
 </header>
 
 <main class="container">
-
-  <!-- HERO -->
   <div class="menu-hero-wrapper">
     <h1>La Dosha Hotel</h1>
     <a href="menu.html" id="menu-button">OPEN MENU</a>
@@ -172,19 +104,20 @@
     </div>
   </div>
 
-  <!-- 🎄 CHRISTMAS OFFER -->
-  <section id="christmasOffer" class="christmas-offer" onclick="addChristmasOfferToCart()">
-    <img src="assets/images/christimasoffer.png" alt="Christmas Offer">
-    <div class="offer-expiry">🎄 Offer valid until 28 December 2025</div>
+  <!-- 🎁 FAITH OFFER -->
+  <section class="mystery-offer" onclick="openVoucher()">
+    <img src="assets/images/faithoffer.png" alt="Faith Mystery Voucher Offer">
+    <div class="offer-expiry">
+      🎁 Faith’s Mystery Voucher<br>
+      ⏳ Valid until 30 January
+    </div>
   </section>
 
-  <!-- 🔴 Live Game Section -->
   <section class="live-game">
     <div class="live-indicator"><span class="dot"></span> Live Game Ongoing</div>
     <p class="live-desc">Spin the wheel now and order a surprise meal!</p>
     <a href="game.html" class="live-btn">Join Game</a>
   </section>
-
 </main>
 
 <footer class="footer">
@@ -192,55 +125,86 @@
   <p>You Order We Deliver</p>
 </footer>
 
+<!-- Voucher Modal -->
+<div id="voucherModal">
+  <div class="modal-content">
+    <h2>Enter Your Faith Voucher</h2>
+    <input type="text" id="voucherCode" placeholder="Enter Voucher Code">
+    <p style="font-size:0.9rem; color:#555; margin-top:10px;">We'll contact you at the hotel to reveal your special meal once you arrive.</p>
+    <button onclick="submitFaithVoucher()">Submit</button>
+    <button onclick="closeVoucher()">Cancel</button>
+  </div>
+</div>
+
 <script>
-  // Toggle mobile menu
-  const menuToggle = document.querySelector('.menu-toggle');
-  const navMenu = document.getElementById('navMenu');
-  menuToggle.addEventListener('click', () => navMenu.classList.toggle('active'));
+const menuToggle = document.querySelector('.menu-toggle');
+const navMenu = document.getElementById('navMenu');
+menuToggle.addEventListener('click', () => navMenu.classList.toggle('active'));
 
-  // Cart functions
-  function updateCartCount() {
-    const cart = JSON.parse(localStorage.getItem("cart")) || [];
-    const total = cart.reduce((sum,item)=>sum+item.qty,0);
-    const cartCount = document.getElementById("cart-count");
-    if(cartCount) cartCount.textContent = total;
+function updateCartCount(){
+  const cart = JSON.parse(localStorage.getItem("cart")) || [];
+  const total = cart.reduce((sum,item)=>sum+item.qty,0);
+  const cartCount = document.getElementById("cart-count");
+  if(cartCount) cartCount.textContent = total;
+}
+
+function showToast(msg){
+  let toast = document.getElementById("toast");
+  if(!toast){
+    toast = document.createElement("div");
+    toast.id="toast";
+    toast.className="toast";
+    toast.style.cssText="position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#333;color:#fff;padding:12px 20px;border-radius:8px;z-index:9999;";
+    document.body.appendChild(toast);
+  }
+  toast.textContent = msg;
+  toast.style.display="block";
+  setTimeout(()=>toast.style.display="none",2000);
+}
+
+function addToCart(id,name,price,img){
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+  let existing = cart.find(item=>item.id===id);
+  if(existing){ existing.qty+=1; } 
+  else { cart.push({id,name,price,qty:1,img}); }
+  localStorage.setItem("cart",JSON.stringify(cart));
+  updateCartCount();
+  showToast(`${name} added to cart ✅`);
+}
+
+// Voucher Modal
+function openVoucher(){ document.getElementById("voucherModal").style.display="flex"; }
+function closeVoucher(){ document.getElementById("voucherModal").style.display="none"; }
+
+const validFaithCodes = [
+"FAITH-FR-92X","FAITH-WT-74B","FAITH-EG-SCR-58C","FAITH-EG-FRD-21M","FAITH-EG-BLD-87N",
+"FAITH-CH-34J","FAITH-COMB-FR+WT-59V","FAITH-COMB-CH+EG-SCR-72K","FAITH-FR-66D","FAITH-WT-48S",
+"FAITH-EG-SCR-13P","FAITH-EG-FRD-90R","FAITH-EG-BLD-37L","FAITH-CH-55X","FAITH-COMB-FR+EG-FRD-26Q",
+"FAITH-FR-81T","FAITH-WT-19H","FAITH-EG-SCR+CH-43Z","FAITH-COMB-CH+EG-BLD+WT-68B","FAITH-CH-77M"
+];
+
+function submitFaithVoucher(){
+  const code = document.getElementById("voucherCode").value.trim().toUpperCase();
+  if(!code){
+    alert("Please enter your voucher code");
+    return;
   }
 
-  function showToast(msg){
-    let toast = document.getElementById("toast");
-    if(!toast){
-      toast = document.createElement("div");
-      toast.id="toast";
-      toast.className="toast";
-      toast.style.cssText="position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#333;color:#fff;padding:12px 20px;border-radius:8px;z-index:9999;";
-      document.body.appendChild(toast);
-    }
-    toast.textContent = msg;
-    toast.style.display="block";
-    setTimeout(()=>toast.style.display="none",2000);
+  if(!validFaithCodes.includes(code)){
+    alert("❌ Wrong code. Please Confirm the Code.");
+    return;
   }
 
-  function addToCart(id,name,price,img){
-    let cart = JSON.parse(localStorage.getItem("cart")) || [];
-    let existing = cart.find(item=>item.id===id);
-    if(existing){ existing.qty+=1; } 
-    else { cart.push({id,name,price,qty:1,img}); }
-    localStorage.setItem("cart",JSON.stringify(cart));
-    updateCartCount();
-    showToast(`${name} added to cart ✅`);
-  }
+  addToCart(
+    "faith-"+code,
+    "Faith Mystery Voucher (Meal revealed at hotel)",
+    0,
+    "assets/images/faithoffer.png"
+  );
 
-  function addChristmasOfferToCart(){
-    addToCart("christmas001","Christmas Special Meal",110,"assets/images/christimasoffer.png");
-  }
-
-  // Christmas offer expiry
-  const offerExpiryDate = new Date("2025-12-28T23:59:59");
-  const now = new Date();
-  const offer = document.getElementById("christmasOffer");
-  if(offer && now>offerExpiryDate){ offer.style.display="none"; }
-
-  document.addEventListener("DOMContentLoaded", updateCartCount);
+  closeVoucher();
+  showToast("✅ Right code! We'll contact you at the hotel to reveal your meal.");
+}
 </script>
 
 </body>
